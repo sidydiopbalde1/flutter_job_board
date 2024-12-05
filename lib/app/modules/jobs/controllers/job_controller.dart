@@ -20,11 +20,13 @@ class Job {
 class JobController extends GetxController {
   final RxList<Job> jobs = <Job>[].obs;
   final Rx<Job?> selectedJob = Rx<Job?>(null);
+    var profilePicture = RxnString();
 
   @override
   void onInit() {
     super.onInit();
     fetchJobs();
+       fetchProfilePicture();
   }
 
   void fetchJobs() {
@@ -53,9 +55,22 @@ class JobController extends GetxController {
       ),
     ];
   }
-
+  void fetchProfilePicture() {
+    // Exemple : Récupérer l'URL de la photo de profil
+    profilePicture.value = 'https://res.cloudinary.com/di50em335/image/upload/v1730225327/uploads/wyzi32fuli00fheydqga.jpg';
+  }
   void selectJob(Job job) {
     selectedJob.value = job;
     Get.toNamed('/job-detail');
+  }
+
+  void logout() {
+    Get.back();
+    // Supprimer les données de session
+    profilePicture.value = null;
+    jobs.clear();
+
+    // 3. Navigate to login screen and remove all previous routes
+    Get.offAllNamed('/login');
   }
 }

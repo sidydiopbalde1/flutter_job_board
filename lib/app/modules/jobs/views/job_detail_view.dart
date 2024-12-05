@@ -169,6 +169,7 @@ class JobDetailView extends GetView<JobController> {
                       'Postuler maintenant',
                       style: TextStyle(
                         fontSize: 16,
+                        color: Colors.white10,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

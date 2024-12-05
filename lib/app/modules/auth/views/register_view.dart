@@ -19,111 +19,109 @@ class RegisterView extends GetView<AuthController> {
         ),
         title: Text(
           'Créer un compte',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         centerTitle: true,
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
                   'Inscrivez-vous',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: Colors.black87,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   'Créez votre compte pour commencer',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey[600],
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey[600],
+                      ),
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 _buildTextField(
                   controller: nameController,
                   labelText: 'Nom complet',
                   prefixIcon: Icons.person_outline,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 _buildTextField(
                   controller: controller.emailController,
                   labelText: 'Email',
                   prefixIcon: Icons.email_outlined,
                   keyboardType: TextInputType.emailAddress,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 _buildTextField(
                   controller: controller.passwordController,
                   labelText: 'Mot de passe',
                   prefixIcon: Icons.lock_outline,
                   obscureText: true,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 _buildTextField(
                   controller: confirmPasswordController,
                   labelText: 'Confirmer le mot de passe',
                   prefixIcon: Icons.lock_outline,
                   obscureText: true,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Obx(() => AnimatedOpacity(
                       opacity: controller.errorMessage.value.isNotEmpty ? 1.0 : 0.0,
-                      duration: Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       child: Text(
                         controller.errorMessage.value,
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 14,
-                        ),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Colors.red,
+                            ),
                         textAlign: TextAlign.center,
                       ),
                     )),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 ElevatedButton(
                   onPressed: _registerUser,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurple,
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   child: Text(
                     'S\'inscrire',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       'Vous avez déjà un compte ? ',
-                      style: TextStyle(color: Colors.grey[600]),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.grey[600],
+                          ),
                     ),
                     GestureDetector(
                       onTap: () => Get.toNamed('/login'),
                       child: Text(
                         'Connectez-vous',
-                        style: TextStyle(
-                          color: Colors.deepPurple,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.deepPurple,
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                     ),
                   ],
@@ -158,7 +156,7 @@ class RegisterView extends GetView<AuthController> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.deepPurple),
+          borderSide: const BorderSide(color: Colors.deepPurple),
         ),
       ),
       keyboardType: keyboardType,
@@ -167,16 +165,16 @@ class RegisterView extends GetView<AuthController> {
   }
 
   void _registerUser() {
-    // Réinitialiser le message d'erreur
+    // Reset the error message
     controller.errorMessage.value = '';
 
-    // Validation des champs
+    // Validate fields
     if (nameController.text.isEmpty) {
-      controller.errorMessage.value = 'Veuillez entrer votre nom';
+      controller.errorMessage.value = 'Veuillez entrer votre nom complet';
       return;
     }
 
-    if (controller.emailController.text.isEmpty || 
+    if (controller.emailController.text.isEmpty ||
         !GetUtils.isEmail(controller.emailController.text)) {
       controller.errorMessage.value = 'Veuillez entrer un email valide';
       return;
@@ -192,7 +190,7 @@ class RegisterView extends GetView<AuthController> {
       return;
     }
 
-    // TODO: Implémenter l'appel à la méthode d'inscription du contrôleur
-    // Par exemple : controller.register()
+    // TODO: Implement the registration method from the controller
+    // Example: controller.register()
   }
 }

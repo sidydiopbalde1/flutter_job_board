@@ -18,20 +18,63 @@ class JobListView extends GetView<JobController> {
           ),
         ),
         actions: [
+          // Profile Picture
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: GestureDetector(
+              onTap: () => Get.toNamed('/profile'), 
+              child: Obx(() {
+                final profilePicture = controller.profilePicture.value;
+                return CircleAvatar(
+                  radius: 18,
+                  backgroundImage: profilePicture != null
+                      ? NetworkImage(profilePicture)
+                      : null,
+                  child: profilePicture == null 
+                      ? Icon(Icons.person, size: 18, color: Colors.grey)
+                      : null,
+                );
+              }),
+            ),
+          ),
+          
+          // Search Icon
           IconButton(
             icon: Icon(Icons.search, color: Colors.black),
             onPressed: () => Get.toNamed('/search'),
           ),
+          
+          // Filter Icon
           IconButton(
             icon: Icon(Icons.filter_list, color: Colors.black),
             onPressed: () {
               // TODO: Implémenter la logique de filtrage
             },
           ),
+          
+          // Logout Popup Menu
+          PopupMenuButton<String>(
+            icon: Icon(Icons.more_vert, color: Colors.black),
+            onSelected: (value) {
+              if (value == 'logout') {
+                _showLogoutConfirmationDialog(context);
+              }
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'logout',
+                child: ListTile(
+                  leading: Icon(Icons.logout, color: Colors.red),
+                  title: Text('Déconnexion', style: TextStyle(color: Colors.red)),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
       body: Column(
         children: [
+          // Search TextField (existing code remains the same)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: TextField(
@@ -47,6 +90,8 @@ class JobListView extends GetView<JobController> {
               ),
             ),
           ),
+          
+          // Job List (existing code remains the same)
           Expanded(
             child: Obx(() => controller.jobs.isEmpty
                 ? _buildEmptyState()
@@ -72,7 +117,38 @@ class JobListView extends GetView<JobController> {
     );
   }
 
-  Widget _buildJobCard(dynamic job, BuildContext context) {
+  // Logout Confirmation Dialog
+  void _showLogoutConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Déconnexion'),
+          content: Text('Êtes-vous sûr de vouloir vous déconnecter ?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Annuler', style: TextStyle(color: Colors.grey)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              child: Text('Déconnexion'),
+              onPressed: () {
+                // Close the dialog
+                Navigator.of(context).pop();
+                
+                // Call logout method from controller
+                controller.logout();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+Widget _buildJobCard(dynamic job, BuildContext context) {
     return GestureDetector(
       onTap: () => controller.selectJob(job),
       child: Container(
@@ -93,7 +169,6 @@ class JobListView extends GetView<JobController> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Company Logo Placeholder
               Container(
                 width: 50,
                 height: 50,
@@ -209,4 +284,12 @@ class JobListView extends GetView<JobController> {
       ),
     );
   }
+  // Existing methods (_buildJobCard, _buildJobTag, _buildEmptyState) remain the same
+  // ... (copy from previous implementation)
 }
+
+
+
+
+
+

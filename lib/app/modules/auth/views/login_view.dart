@@ -27,7 +27,7 @@ class LoginView extends GetView<AuthController> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'Bienvenue',
+                        'Dalal ak Jam si Liguey',
                         style: theme.textTheme.headlineLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: theme.primaryColor,
@@ -73,6 +73,11 @@ class LoginView extends GetView<AuthController> {
                   child: TextButton(
                     onPressed: () {
                       // TODO: Implémenter la réinitialisation de mot de passe
+                      Get.snackbar(
+                        "Info",
+                        "Réinitialisation de mot de passe bientôt disponible.",
+                        snackPosition: SnackPosition.BOTTOM,
+                      );
                     },
                     child: Text(
                       'Mot de passe oublié ?',

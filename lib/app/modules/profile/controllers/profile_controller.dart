@@ -11,16 +11,16 @@ class UserProfile {
   UserProfile({
     required this.name,
     required this.email,
-    this.profilePicture,
+    this.profilePicture ='https://res.cloudinary.com/di50em335/image/upload/v1730225327/uploads/wyzi32fuli00fheydqga.jpg',
     this.skills = const [],
   });
 }
 
 class ProfileController extends GetxController {
   final Rx<UserProfile> userProfile = UserProfile(
-    name: 'Jean Dupont', 
-    email: 'jean.dupont@example.com',
-    skills: ['Flutter', 'Dart', 'Firebase'],
+    name: 'Balde Sidy Diop', 
+    email: 'newsdb191@examgmail.com',
+    skills: ['Flutter', 'Dart', 'Firebase','ReactJs','Angular','Laravel'],
   ).obs;
 
   final skillController = TextEditingController();

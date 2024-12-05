@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "997222127567",
+    "project_id": "jobboardliguey",
+    "storage_bucket": "jobboardliguey.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997222127567:android:28cadbe9f57d4d1977e4ba",
+        "android_client_info": {
+          "package_name": "com.example.job_board_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997222127567-0fnheuefj0iio3s9rlddqpmo7obuoum3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.job_board_flutter",
+            "certificate_hash": "8e9ca2b7299deff6e5762c75db306d358d874eea"
+          }
+        },
+        {
+          "client_id": "997222127567-ii5otfklqjocjlpp86r3bvrrvr55t5oj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTzw5QBNhK8LzNkg_TNvY0WoL55mB9dxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997222127567-ii5otfklqjocjlpp86r3bvrrvr55t5oj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
